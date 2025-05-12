@@ -1,0 +1,100 @@
+@charset "UTF-8";
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+body *{
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+select {
+	border-radius: 10px;
+    padding: 4px;
+}
+
+button {
+	border : 0;
+	border-radius: 10px;
+    padding: 5px 15px;
+    cursor: pointer;
+}
+
+.wrap-container{
+	display:flex;
+}
+
+.container {
+	padding : 25px;
+    width: 400px;
+}
+
+.container header {
+	height: 110px;
+	width: 100%;
+	display: flex;
+	align-items: center;
+    justify-content: center;
+}
+.container header button{
+	background-color: transparent;
+	margin: 10px;
+	height: 50px;
+    font-size: 30px;
+    font-weight: 500;
+	border: 0px;
+}
+
+.container header #calendar-title {
+	display: flex;
+	flex-direction: row;
+	padding: 15px;
+}
+
+/* 요일  */
+.days {
+	width: 382px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 15px 0;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #c1c1c1;
+}
+.day-name {
+    color: #333;
+}
+
+/* 날짜  */
+.day{
+	color: #212121;
+	padding: 10px;
+	font-size: 14px;
+}
+.dates{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+	height : 300px;
+	width : 380px;
+/* 	border : 1px solid black; */
+}
+.sunday {
+    color: red !important;
+}
+.saturday {
+    color: blue !important;
+}
+.dates .prev, .dates .next {
+	color: #8f8f8f !important;
+}
+
+.selectBox{
+	height: 100px;
+}
+
+#submitBaseDateBtn{
+	width: 160px;
+}
