@@ -8,20 +8,25 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/calendar.js"></script>
 </head>
-<body>
-
+<body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
+​
 	<div class="wrap-container">
-		<div class="container">
-			<header>
+	
+		<div class="calendar-container">
+			<div class="calendar-header">
 				<button id="prev-month"> &lt </button>
 				<div id="calendar-title">
 					<h1 id="title-year" >2025.</h1>
 					<h1 id="title-month">5</h1>
 				</div>
 				<button id="next-month" > &gt </button>
-			</header>
+			</div>
+			
+			<div class="calendar-toolbar">
+				<button id="goToday">오늘날짜로 이동</button>
+			</div>
 		
-			<div class="days">
+			<div class="calendar-days">
 		        <div class="day-name sunday">SUN</div>
 		        <div class="day-name">MON</div>
 		        <div class="day-name">TUE</div>
@@ -31,13 +36,10 @@
 		        <div class="day-name saturday">SAT</div>
 		    </div>
 		
-			<div class="dates"></div>
-		
-		
+			<div class="calendar-dates"></div>
 		</div>
 		
 		<div class="control-container">
-		
 			<div style="height:150px;">
 			</div>
 		
@@ -51,23 +53,30 @@
 					<option value="holiday">연차</option>
 					<option value="other">기타</option>
 				</select>
-				
-				
-				<select id="colorSelect">
-					<option value="">색상 선택</option>
-				  	<option value="red" data-color="red">빨강</option>
-				  	<option value="blue" data-color="blue">파랑</option>
-				  	<option value="green" data-color="green">초록</option>
-				  	<option value="orange" data-color="orange">주황</option>
-				  	<option value="purple" data-color="purple">보라</option>
-				  	<option value="yellow" data-color="yellow">노랑</option>
-				</select>
+
 				
 				<button id="addWorkTypeBtn">추가</button>
+				<button id="resetWorkTypeBtn">초기화</button>
 				
-				<div id="workTypePreviewBox">
-				
-				
+				<div>
+					<ul id="workTypePreviewBox">
+					    <li class="work-item day">
+					      <span class="work-label">주</span>
+					      <span class="delete-btn">x</span>
+					    </li>
+					    <li class="work-item night">
+					      <span class="work-label">야</span>
+					      <span class="delete-btn">x</span>
+					    </li>
+					    <li class="work-item rest">
+					      <span class="work-label">비</span>
+					      <span class="delete-btn">x</span>
+					    </li>
+					    <li class="work-item off">
+					      <span class="work-label">휴</span>
+					      <span class="delete-btn">x</span>
+					    </li>
+					  </ul>
 				</div>
 				
 			</div>
@@ -75,6 +84,7 @@
 			<div class="baseBox">
 				<input type="date" id="baseDateInput">
 				<select id="baseWorkTypeSelect"> 
+					<option value="">선택</option>
 					<option>주</option>
 					<option>야</option>
 					<option>비</option>
@@ -83,7 +93,7 @@
 			</div>
 			<button id="submitBaseDateBtn">기준일 입력</button>
 		</div>
-	
+		
 	</div>
 
 	

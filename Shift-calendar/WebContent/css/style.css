@@ -6,38 +6,42 @@ body {
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 body *{
+	/* box-sizing: border-box; */
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
 select {
 	border-radius: 10px;
-    padding: 4px;
+    padding: 5px;
 }
 
 button {
 	border : 0;
 	border-radius: 10px;
-    padding: 5px 15px;
+    padding: 6px 15px;
     cursor: pointer;
 }
-
+input {
+	border-radius: 10px;
+    padding: 5px;
+}
 .wrap-container{
 	display:flex;
 }
 
-.container {
+.calendar-container {
 	padding : 25px;
     width: 400px;
 }
 
-.container header {
+.calendar-container .calendar-header {
 	height: 110px;
 	width: 100%;
 	display: flex;
 	align-items: center;
     justify-content: center;
 }
-.container header button{
+.calendar-container .calendar-header button{
 	background-color: transparent;
 	margin: 10px;
 	height: 50px;
@@ -45,15 +49,20 @@ button {
     font-weight: 500;
 	border: 0px;
 }
-
-.container header #calendar-title {
+.calendar-container .calendar-header #calendar-title {
 	display: flex;
 	flex-direction: row;
 	padding: 15px;
 }
 
+.calendar-toolbar{
+    display: flex;
+    justify-content: flex-end;
+}
+
+
 /* 요일  */
-.days {
+.calendar-days {
 	width: 382px;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -74,12 +83,11 @@ button {
 	padding: 10px;
 	font-size: 14px;
 }
-.dates{
+.calendar-dates{
     display: grid;
     grid-template-columns: repeat(7, 1fr);
 	height : 300px;
 	width : 380px;
-/* 	border : 1px solid black; */
 }
 .sunday {
     color: red !important;
@@ -87,14 +95,64 @@ button {
 .saturday {
     color: blue !important;
 }
-.dates .prev, .dates .next {
+.calendar-dates .prev, .calendar-dates .next {
 	color: #8f8f8f !important;
 }
 
+
 .selectBox{
-	height: 100px;
+	height: 150px;
 }
 
 #submitBaseDateBtn{
 	width: 160px;
+}
+
+
+/* 근무유형  */
+#workTypePreviewBox{
+    padding: 0;
+	box-sizing: border-box;
+	margin-top: 8px;
+	display: grid;
+    grid-template-columns: repeat(10, 1fr);
+}
+#workTypePreviewBox li{
+    border-radius: 6px;
+    font-size: 15px;
+    list-style-type: none;
+    padding: 12px 4px;
+    margin: 5px 4px;
+    width: 42px;
+    height: 22px;
+    text-align: center;
+    display:flex;
+	justify-content: center;
+}
+#workTypePreviewBox .work-label{
+	margin-left: 6px;
+}
+#workTypePreviewBox .day{ background-color :  #fff0a2;}
+#workTypePreviewBox .night{ background-color :  #ffbe58;}
+#workTypePreviewBox .rest{ background-color :  #ffa874;}
+#workTypePreviewBox .off{ background-color :  #c7c7c7;}
+#workTypePreviewBox .holiday{ background-color : #ffa0a0;}
+#workTypePreviewBox .other{ background-color :  #fff0a2;}
+
+.delete-btn {
+    font-weight: 500;
+    color: #5d5d5d;
+    cursor: pointer;
+    position: relative;
+    right: -4px;
+    top: -13px;
+}
+
+.baseBox{
+	margin-top: 10px;
+}
+
+#submitBaseDateBtn {
+    margin-top: 8px;
+    width: 180px;
 }

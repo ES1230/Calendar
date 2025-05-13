@@ -1,18 +1,34 @@
 //참고사이트 https://songsong.dev/entry/Javascript로-달력-만들기 [송송은 오늘도 열심히 코딩 하네:티스토리]
 
+
+let currentDate = new Date();
+
 document.addEventListener('DOMContentLoaded', function () {
+
+	document.getElementById('baseDateInput').value = currentDate.toISOString().split('T')[0];
 	rendarCalendar(currentDate);
 	
 	//이번달,저번달 이동
 	document.getElementById('prev-month').addEventListener('click', prevMonth);
 	document.getElementById('next-month').addEventListener('click', nextMonth);
 	
-	//추가
+	//근무유형 추가
 	document.getElementById('addWorkTypeBtn').addEventListener('click', addWorkType);
+	//근무유형 삭제
+	document.getElementById('workTypePreviewBox').addEventListener('click', function (e) {
+		if (e.target.classList.contains('delete-btn')) {
+			const li = e.target.closest('li');
+			if (li) {
+				li.remove();
+			}
+		}
+	});
+	//근무유형 초기화
+	document.getElementById('resetWorkTypeBtn').addEventListener('click', resetWorkType);
+	
+	//기준일입력
+	document.getElementById('submitBaseDateBtn').addEventListener('click', setWorkType);
 });
-
-
-let currentDate = new Date();
 
 function rendarCalendar(date) {
     const currentYear = date.getFullYear();
@@ -22,7 +38,7 @@ function rendarCalendar(date) {
     document.getElementById('title-year').innerText = currentYear + '.';
     document.getElementById('title-month').innerText = (currentMonth + 1);
 
-    const calendar = document.querySelector('.dates');
+    const calendar = document.querySelector('.calendar-dates');
     calendar.innerHTML = '';
 
     // 이번 달 1일 요일 (0: 일요일 ~ 6: 토요일)
@@ -80,20 +96,49 @@ function goToday() {
     rendarCalendar(currentDate);
 }
 
+//근무유형 추가
+function addWorkType() {
+	
+	const workTypeSelect = document.getElementById('workTypeSelect');
+	const workType = workTypeSelect.value;
+	const workTypeText = workTypeSelect.options[workTypeSelect.selectedIndex].text;
 
-function addWorkType(){
-	
-	const workType = document.getElementById('workTypeSelect').value;
-	const color = document.getElementById('colorSelect').value;
-	
-	if(!workType || !color){
-		alert('근무 유형과 색상을 모두 선택해주세요.');
+	if (!workType) {
+		alert('근무 유형을 선택 후 추가해주세요.');
 		return;
 	}
 	
+	const workTypeItems = document.querySelectorAll('#workTypePreviewBox li');
+	if (workTypeItems.length >= 20) {
+		alert('근무 유형은 최대 20개까지 추가할 수 있습니다.');
+		return;
+	}
 	
+	const li = document.createElement('li');
+	li.classList.add('work-item', workType);
+
+	const labelSpan = document.createElement('span');
+	labelSpan.className = 'work-label';
+	labelSpan.textContent = workTypeText;
+
+	const deleteBtn = document.createElement('span');
+	deleteBtn.className = 'delete-btn';
+	deleteBtn.textContent = 'x';
+
+	li.appendChild(labelSpan);
+	li.appendChild(deleteBtn);
+
+	document.getElementById('workTypePreviewBox').appendChild(li);
+}
+
+//근무유형 초기화
+function resetWorkType(){
+	
+	const workTypeItems = document.querySelectorAll('#workTypePreviewBox li');
+	workTypeItems.forEach(item => item.remove());
 	
 }
 
-
-
+function setWorkType(){
+	
+}
