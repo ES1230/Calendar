@@ -1,158 +1,207 @@
 @charset "UTF-8";
 
+/* 기본 설정 */
 body {
 	margin: 0;
 	padding: 0;
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
-body *{
-	/* box-sizing: border-box; */
-	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-}
-
-select {
-	border-radius: 10px;
-    padding: 5px;
-}
-
-button {
-	border : 0;
-	border-radius: 10px;
-    padding: 6px 15px;
-    cursor: pointer;
-}
+select,
 input {
 	border-radius: 10px;
-    padding: 5px;
+	padding: 5px;
 }
-.wrap-container{
-	display:flex;
+button {
+	cursor: pointer;
+	border: none;
+	border-radius: 6px;
+	padding: 6px 12px;
+}
+button.primary {
+	background-color: #4CAF50;
+	color: white;
+}
+button.secondary {
+	background-color: #ccc;
 }
 
+/* 컨테이너 */
+.wrap-container {
+	display: flex;
+}
 .calendar-container {
-	padding : 25px;
-    width: 400px;
+	padding: 25px;
+	width: 400px;
 }
 
+/* 캘린더 헤더 */
 .calendar-container .calendar-header {
 	height: 110px;
 	width: 100%;
 	display: flex;
 	align-items: center;
-    justify-content: center;
+	justify-content: center;
 }
-.calendar-container .calendar-header button{
+.calendar-container .calendar-header button {
 	background-color: transparent;
 	margin: 10px;
 	height: 50px;
-    font-size: 30px;
-    font-weight: 500;
-	border: 0px;
+	font-size: 30px;
+	font-weight: 500;
 }
 .calendar-container .calendar-header #calendar-title {
 	display: flex;
 	flex-direction: row;
 	padding: 15px;
 }
-
-.calendar-toolbar{
-    display: flex;
-    justify-content: flex-end;
+.calendar-toolbar {
+	display: flex;
+	justify-content: flex-end;
 }
 
-
-/* 요일  */
+/* 요일 */
 .calendar-days {
 	width: 382px;
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    text-align: center;
-    font-size: 13px;
-    font-weight: bold;
-    padding: 15px 0;
-    margin-bottom: 10px;
-    border-bottom: 2px solid #c1c1c1;
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	text-align: center;
+	font-size: 13px;
+	font-weight: bold;
+	padding: 15px 0;
+	margin-bottom: 10px;
+	border-bottom: 2px solid #c1c1c1;
 }
 .day-name {
-    color: #333;
+	color: #333;
 }
 
-/* 날짜  */
-.day{
+/* 날짜 */
+.calendar-dates {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	height: 350px;
+	width: 380px;
+}
+.day {
 	color: #212121;
-	padding: 10px;
+	padding: 8px;
 	font-size: 14px;
 }
-.calendar-dates{
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-	height : 300px;
-	width : 380px;
-}
 .sunday {
-    color: red !important;
+	color: red !important;
 }
 .saturday {
-    color: blue !important;
+	color: blue !important;
 }
-.calendar-dates .prev, .calendar-dates .next {
+.calendar-dates .prev,
+.calendar-dates .next {
 	color: #8f8f8f !important;
 }
 
-
-.selectBox{
-	height: 150px;
-}
-
-#submitBaseDateBtn{
-	width: 160px;
-}
-
-
-/* 근무유형  */
-#workTypePreviewBox{
-    padding: 0;
-	box-sizing: border-box;
+/* 근무유형 프리뷰 */
+#workTypePreviewBox {
+    height: 80px;
 	margin-top: 8px;
 	display: grid;
-    grid-template-columns: repeat(10, 1fr);
+	grid-template-columns: repeat(10, 1fr);
+	padding: 0;
 }
-#workTypePreviewBox li{
-    border-radius: 6px;
-    font-size: 15px;
-    list-style-type: none;
-    padding: 12px 4px;
-    margin: 5px 4px;
-    width: 42px;
-    height: 22px;
-    text-align: center;
-    display:flex;
+#workTypePreviewBox li {
+	border-radius: 6px;
+	font-size: 13px;
+	list-style: none;
+	padding: 9px 7px;
+	margin: 5px 4px;s
+	width: 42px;
+	height: 22px;
+	display: flex;
 	justify-content: center;
+	text-align: center;
 }
-#workTypePreviewBox .work-label{
+.work-label{
+	color :#666 ;
+}
+#workTypePreviewBox .work-label {
 	margin-left: 6px;
+	color : black;
 }
-#workTypePreviewBox .day{ background-color :  #fff0a2;}
-#workTypePreviewBox .night{ background-color :  #ffbe58;}
-#workTypePreviewBox .rest{ background-color :  #ffa874;}
-#workTypePreviewBox .off{ background-color :  #c7c7c7;}
-#workTypePreviewBox .holiday{ background-color : #ffa0a0;}
-#workTypePreviewBox .other{ background-color :  #fff0a2;}
+#workTypePreviewBox .day {
+	background-color: #fff0a2;
+}
+#workTypePreviewBox .night {
+	background-color: #ffbe58;
+}
+#workTypePreviewBox .rest {
+	background-color: #ffa874;
+}
+#workTypePreviewBox .off {
+	background-color: #c7c7c7;
+}
+#workTypePreviewBox .holiday {
+	background-color: #ffa0a0;
+}
+#workTypePreviewBox .other {
+	background-color: #dfefff;
+}
 
+/* 삭제 버튼 */
 .delete-btn {
-    font-weight: 500;
-    color: #5d5d5d;
-    cursor: pointer;
-    position: relative;
-    right: -4px;
-    top: -13px;
+	font-weight: 500;
+	color: #5d5d5d;
+	cursor: pointer;
+	position: relative;
+	right: -5px;
+	top: -13px;
+}
+.preview-list .delete-btn {
+	margin-left: 6px;
+	color: red;
 }
 
-.baseBox{
+/* 기타 설정 */
+.baseBox {
 	margin-top: 10px;
 }
-
 #submitBaseDateBtn {
-    margin-top: 8px;
-    width: 180px;
+	margin-top: 8px;
+    width: 255px;
+    height: 45px;
 }
+.section {
+	margin-bottom: 20px;
+}
+h3 {
+	margin-bottom: 6px;
+	font-size: 1.1em;
+	color: #333;
+}
+.desc {
+	margin-bottom: 10px;
+	font-size: 0.9em;
+	color: #666;
+}
+.workTypeControl {
+	display: flex;
+	gap: 8px;
+	margin-bottom: 10px;
+}
+.preview-list {
+	display: flex;
+	gap: 6px;
+	flex-wrap: wrap;
+	padding: 0;
+	list-style: none;
+}
+.preview-list .work-item {
+	background: #eee;
+	border-radius: 4px;
+	padding: 4px 8px;
+	display: flex;
+	align-items: center;
+}
+ 
+/* 오늘날짜 강조 */
+.today {
+    background-color: #ffeaea;
+    font-weight: bold;
+} 

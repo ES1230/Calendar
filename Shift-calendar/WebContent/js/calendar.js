@@ -1,6 +1,5 @@
 //참고사이트 https://songsong.dev/entry/Javascript로-달력-만들기 [송송은 오늘도 열심히 코딩 하네:티스토리]
 
-
 let currentDate = new Date();
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -8,9 +7,10 @@ document.addEventListener('DOMContentLoaded', function () {
 	document.getElementById('baseDateInput').value = currentDate.toISOString().split('T')[0];
 	rendarCalendar(currentDate);
 	
-	//이번달,저번달 이동
+	//이번달,저번달, 오늘날짜 이동
 	document.getElementById('prev-month').addEventListener('click', prevMonth);
 	document.getElementById('next-month').addEventListener('click', nextMonth);
+	document.getElementById('goToday').addEventListener('click', goToday);
 	
 	//근무유형 추가
 	document.getElementById('addWorkTypeBtn').addEventListener('click', addWorkType);
@@ -28,9 +28,11 @@ document.addEventListener('DOMContentLoaded', function () {
 	
 	//기준일입력
 	document.getElementById('submitBaseDateBtn').addEventListener('click', setWorkType);
+	
 });
 
 function rendarCalendar(date) {
+	
     const currentYear = date.getFullYear();
     const currentMonth = date.getMonth();
 
@@ -62,11 +64,54 @@ function rendarCalendar(date) {
     }
 
     // 이번달 날짜
-    for (let i = 1; i <= thisDate; i++) {
+  /*  for (let i = 1; i <= thisDate; i++) {
         const dayOfWeek = new Date(currentYear, currentMonth, i).getDay();
         const dayClass = dayOfWeek === 0 ? 'sunday' : dayOfWeek === 6 ? 'saturday' : '';
         calendar.innerHTML += `<div class="day current ${dayClass}">${i}</div>`;
+    }*/
+    
+    for (let i = 1; i <= thisDate; i++) {
+        const currentDate = new Date(currentYear, currentMonth, i); // 날짜 객체 생성
+        const dayOfWeek = currentDate.getDay(); // 요일 (0:일 ~ 6:토)
+
+        // 요일에 따라 클래스 설정 (일요일: sunday, 토요일: saturday)
+        const dayClass = dayOfWeek === 0 ? 'sunday' : dayOfWeek === 6 ? 'saturday' : '';
+
+        let extraClass = ''; // 추가 클래스 저장용
+        let label = '';      // 근무유형 텍스트 표시용
+
+        // 오늘 날짜인지 확인
+        const today = new Date();
+        const isToday =
+            currentDate.getFullYear() === today.getFullYear() &&
+            currentDate.getMonth() === today.getMonth() &&
+            currentDate.getDate() === today.getDate();
+
+        // 오늘이면 'today' 클래스 추가
+        if (isToday) {
+            extraClass += ' today';
+        }
+
+        // 근무유형 표시 (baseDate 이후 + 현재 달인 경우에만)
+        if (
+            baseDate &&
+            workTypeCycle.length > 0 &&
+            currentDate >= baseDate &&
+            currentDate.getFullYear() === date.getFullYear() &&
+            currentDate.getMonth() === date.getMonth()
+        ) {
+            const diffDays = Math.floor((currentDate - baseDate) / (1000 * 60 * 60 * 24)); // 경과일 계산
+            const workIndex = diffDays % workTypeCycle.length; // 반복되는 근무유형 인덱스
+            const work = workTypeCycle[workIndex]; // 근무유형 객체 (type, label)
+
+            extraClass += ` ${work.type}`; // CSS 클래스 추가
+            label = `<div class="work-label">${work.label}</div>`; // 화면에 표시할 텍스트
+        }
+
+        // 날짜 칸 HTML 추가
+        calendar.innerHTML += `<div class="day current ${dayClass} ${extraClass}">${i}${label}</div>`;
     }
+    
 
     // 다음달 날짜
     const totalCells = firstDay + thisDate;
@@ -76,6 +121,7 @@ function rendarCalendar(date) {
         const dayClass = dayOfWeek === 0 ? 'sunday' : dayOfWeek === 6 ? 'saturday' : '';
         calendar.innerHTML += `<div class="day next disable ${dayClass}">${i}</div>`;
     }
+    
 }
 
 //다음달 이동
@@ -139,6 +185,38 @@ function resetWorkType(){
 	
 }
 
+
+let baseDate = null; //기준일
+let workTypeCycle = []; //근무유형
+
+//입력한기준일로 근무유형 추가
 function setWorkType(){
 	
+	
+	const dateInput = document.getElementById('baseDateInput').value;
+    if (!dateInput) {
+        alert('기준일을 선택해주세요.');
+        return;
+    }
+    baseDate = new Date(dateInput);
+
+    const items = document.querySelectorAll('#workTypePreviewBox .work-item');
+    if (items.length === 0) {
+        alert('근무유형을 먼저 추가해주세요.');
+        return;
+    }
+
+    workTypeCycle = Array.from(items).map(item => {
+        return {
+            type: item.classList[1], // 'day', 'night'
+            label: item.querySelector('.work-label').innerText
+        };
+    });
+
+    rendarCalendar(baseDate); 
+	
 }
+
+
+
+
