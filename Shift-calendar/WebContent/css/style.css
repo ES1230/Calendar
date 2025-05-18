@@ -17,6 +17,9 @@ button {
 	border-radius: 6px;
 	padding: 6px 12px;
 }
+button:hover {
+    background-color: #a4e0ff;
+}
 button.primary {
 	background-color: #4CAF50;
 	color: white;
@@ -202,6 +205,6 @@ h3 {
  
 /* 오늘날짜 강조 */
 .today {
-    background-color: #ffeaea;
+    background-color: #d1efff;
     font-weight: bold;
 } 

@@ -92,26 +92,37 @@ function rendarCalendar(date) {
             extraClass += ' today';
         }
 
-        // 근무유형 표시 (baseDate 이후 + 현재 달인 경우에만)
-        if (
-            baseDate &&
-            workTypeCycle.length > 0 &&
-            currentDate >= baseDate &&
-            currentDate.getFullYear() === date.getFullYear() &&
-            currentDate.getMonth() === date.getMonth()
-        ) {
-            const diffDays = Math.floor((currentDate - baseDate) / (1000 * 60 * 60 * 24)); // 경과일 계산
-            const workIndex = diffDays % workTypeCycle.length; // 반복되는 근무유형 인덱스
-            const work = workTypeCycle[workIndex]; // 근무유형 객체 (type, label)
+        //기준일 있을 때
+        if(baseDate){
+           const baseDateNoTime = resetTime(baseDate);
+           const currentDateNoTime = resetTime(currentDate);
 
-            extraClass += ` ${work.type}`; // CSS 클래스 추가
-            label = `<div class="work-label">${work.label}</div>`; // 화면에 표시할 텍스트
-        }
+            // 근무유형 표시 (baseDate 이후 + 현재 달인 경우에만)
+            if (
+                baseDate &&
+                workTypeCycle.length > 0 &&
+                currentDate >= baseDateNoTime &&
+                currentDate.getFullYear() === date.getFullYear() &&
+                currentDate.getMonth() === date.getMonth()
+            ) {
+                const diffDays = Math.floor((currentDateNoTime - baseDateNoTime) / (1000 * 60 * 60 * 24));
 
-        // 날짜 칸 HTML 추가
-        calendar.innerHTML += `<div class="day current ${dayClass} ${extraClass}">${i}${label}</div>`;
+                if (diffDays >= 0) {
+                    const workIndex = diffDays % workTypeCycle.length;
+                    const work = workTypeCycle[workIndex];
+
+                    extraClass += ` ${work.type}`;
+                    label = `<div class="work-label">${work.label}</div>`;
+                }
+            }
+
+            // 날짜 칸 HTML 추가
+            calendar.innerHTML += `<div class="day current ${dayClass} ${extraClass}">${i}${label}</div>`;
+        }else {
+             // baseDate가 없을 때는 근무유형 없이 기본 날짜 칸만 그리기
+             calendar.innerHTML += `<div class="day current ${dayClass}">${i}</div>`;
+         }
     }
-    
 
     // 다음달 날짜
     const totalCells = firstDay + thisDate;
@@ -122,6 +133,11 @@ function rendarCalendar(date) {
         calendar.innerHTML += `<div class="day next disable ${dayClass}">${i}</div>`;
     }
     
+}
+
+//시간 00:00:00으로 초기화
+function resetTime(date) {
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
 }
 
 //다음달 이동
