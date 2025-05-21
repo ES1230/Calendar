@@ -4,7 +4,8 @@ let currentDate = new Date();
 
 document.addEventListener('DOMContentLoaded', function () {
 
-	document.getElementById('baseDateInput').value = currentDate.toISOString().split('T')[0];
+	let currentDate = new Date();
+	document.getElementById('baseDateInput').value = getLocalDateStr(currentDate);
 	rendarCalendar(currentDate);
 	
 	//이번달,저번달, 오늘날짜 이동
@@ -30,6 +31,14 @@ document.addEventListener('DOMContentLoaded', function () {
 	document.getElementById('submitBaseDateBtn').addEventListener('click', setWorkType);
 	
 });
+
+function getLocalDateStr(date) {
+	const year = date.getFullYear();
+	const month = String(date.getMonth() + 1).padStart(2, '0');
+	const day = String(date.getDate()).padStart(2, '0');
+	return `${year}-${month}-${day}`;
+}
+
 
 function rendarCalendar(date) {
 	
@@ -207,7 +216,6 @@ let workTypeCycle = []; //근무유형
 
 //입력한기준일로 근무유형 추가
 function setWorkType(){
-	
 	
 	const dateInput = document.getElementById('baseDateInput').value;
     if (!dateInput) {

@@ -29,12 +29,26 @@ button.secondary {
 }
 
 /* 컨테이너 */
+.container{
+	display:flex;
+    flex-direction: column;
+    width:1000px;
+}
+.title-container{
+	width:100%;
+	text-align:center;
+}
+
 .wrap-container {
 	display: flex;
 }
 .calendar-container {
-	padding: 25px;
-	width: 400px;
+    padding: 20px;
+    width: 400px;
+    margin: 0px 30px;
+}
+.control-container{
+	width:100%;
 }
 
 /* 캘린더 헤더 */
@@ -111,15 +125,16 @@ button.secondary {
 }
 #workTypePreviewBox li {
 	border-radius: 6px;
-	font-size: 13px;
-	list-style: none;
-	padding: 9px 7px;
-	margin: 5px 4px;s
-	width: 42px;
-	height: 22px;
-	display: flex;
-	justify-content: center;
-	text-align: center;
+    font-size: 13px;
+    list-style: none;
+    padding: 5px;
+    margin: 5px 4px;
+    width: 46px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
 }
 .work-label{
 	color :#666 ;
@@ -171,7 +186,7 @@ button.secondary {
     height: 45px;
 }
 .section {
-	margin-bottom: 20px;
+	margin-bottom: 25px;
 }
 h3 {
 	margin-bottom: 6px;
@@ -180,7 +195,7 @@ h3 {
 }
 .desc {
 	margin-bottom: 10px;
-	font-size: 0.9em;
+	font-size: 0.8em;
 	color: #666;
 }
 .workTypeControl {
