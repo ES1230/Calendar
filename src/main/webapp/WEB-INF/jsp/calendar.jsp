@@ -5,8 +5,8 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>달력</title>
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/calendar.js"></script>
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style.css">
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/calendar.js"></script>
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
 ​
@@ -60,8 +60,9 @@
 				
 				<div class="section baseBox">
 					<h3>■ 기준일 선택</h3>
-					<p class="desc">근무패턴을 시작할 기준일을 선택해 주세요.</p>
-					<input type="date" id="baseDateInput"/>
+					<p class="desc"> 근무기준시작일~근무기준종료일을 선택해주세요.</p>
+					<input type="date" id="workStartDate"/> ~
+					<input type="date" id="workEndDate"/>
 				</div>
 			
 				<div class="section selectBox">

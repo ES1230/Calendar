@@ -1,11 +1,9 @@
-//참고사이트 https://songsong.dev/entry/Javascript로-달력-만들기 [송송은 오늘도 열심히 코딩 하네:티스토리]
-
 let currentDate = new Date();
 
 document.addEventListener('DOMContentLoaded', function () {
 
 	let currentDate = new Date();
-	document.getElementById('baseDateInput').value = getLocalDateStr(currentDate);
+	document.getElementById('workStartDate').value = getLocalDateStr(currentDate);
 	rendarCalendar(currentDate);
 	
 	//이번달,저번달, 오늘날짜 이동
@@ -109,8 +107,10 @@ function rendarCalendar(date) {
             // 근무유형 표시 (baseDate 이후 + 현재 달인 경우에만)
             if (
                 baseDate &&
+                endDate &&
                 workTypeCycle.length > 0 &&
                 currentDate >= baseDateNoTime &&
+                currentDate <= endDate &&
                 currentDate.getFullYear() === date.getFullYear() &&
                 currentDate.getMonth() === date.getMonth()
             ) {
@@ -204,25 +204,34 @@ function addWorkType() {
 
 //근무유형 초기화
 function resetWorkType(){
-	
 	const workTypeItems = document.querySelectorAll('#workTypePreviewBox li');
 	workTypeItems.forEach(item => item.remove());
-	
 }
 
 
 let baseDate = null; //기준일
+let endDate = null; // 종료일
 let workTypeCycle = []; //근무유형
 
 //입력한기준일로 근무유형 추가
 function setWorkType(){
-	
-	const dateInput = document.getElementById('baseDateInput').value;
-    if (!dateInput) {
-        alert('기준일을 선택해주세요.');
+
+	const startDateValue = document.getElementById('workStartDate').value;
+	const endDateValue = document.getElementById('workEndDate').value;
+    if (!startDateValue || !endDateValue) {
+        alert('근무기준 시작일과 종료일을 모두 선택해주세요.');
         return;
     }
-    baseDate = new Date(dateInput);
+
+    const startDate = new Date(startDateValue);
+    const finishDate = new Date(endDateValue);
+    if (startDate > finishDate) {
+        alert('시작일은 종료일보다 빠르거나 같아야 합니다.');
+        return;
+    }
+
+    baseDate = new Date(startDate);
+    endDate = new Date(finishDate);
 
     const items = document.querySelectorAll('#workTypePreviewBox .work-item');
     if (items.length === 0) {
