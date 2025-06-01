@@ -8,8 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style.css">
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/calendar.js"></script>
 </head>
-<body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
-​
+<body  ondragstart="return false">
 	<div class="container">
 
 		<div class="title-container">

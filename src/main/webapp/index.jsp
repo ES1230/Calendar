@@ -6,6 +6,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<jsp:include page="WEB-INF/jsp/calendar.jsp" />
+	<jsp:include page="WEB-INF/jsp/calendarTest.jsp" />
 </body>
 </html>

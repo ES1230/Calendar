@@ -4,9 +4,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	let currentDate = new Date();
 	document.getElementById('workStartDate').value = getLocalDateStr(currentDate);
+	document.getElementById('workEndDate').value = getLocalDateStr(currentDate);
+
 	rendarCalendar(currentDate);
 	
-	//이번달,저번달, 오늘날짜 이동
+	//이번달,저번달,오늘날짜 이동
 	document.getElementById('prev-month').addEventListener('click', prevMonth);
 	document.getElementById('next-month').addEventListener('click', nextMonth);
 	document.getElementById('goToday').addEventListener('click', goToday);
@@ -25,10 +27,35 @@ document.addEventListener('DOMContentLoaded', function () {
 	//근무유형 초기화
 	document.getElementById('resetWorkTypeBtn').addEventListener('click', resetWorkType);
 	
-	//기준일입력
+	//교대근무 달력에 적용
 	document.getElementById('submitBaseDateBtn').addEventListener('click', setWorkType);
-	
+
+    clickTab();
+
+
 });
+
+function clickTab(){
+
+    const tabLinks = document.querySelectorAll(".tab-link");
+
+    tabLinks.forEach(function(tab){
+        tab.addEventListener("click",function(e){
+            e.preventDefault();
+
+            //모든 탭 비활성화
+            tabLinks.forEach(t => t.classList.remove("active"));
+            document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
+
+            //클릭한 탭 활성화
+            this.classList.add("active");
+            const tabId = this.getAttribute("data-tab");
+            document.getElementById(tabId).classList.add("active");
+
+        });
+    });
+
+}
 
 function getLocalDateStr(date) {
 	const year = date.getFullYear();
@@ -37,9 +64,8 @@ function getLocalDateStr(date) {
 	return `${year}-${month}-${day}`;
 }
 
-
 function rendarCalendar(date) {
-	
+
     const currentYear = date.getFullYear();
     const currentMonth = date.getMonth();
 
@@ -71,12 +97,6 @@ function rendarCalendar(date) {
     }
 
     // 이번달 날짜
-  /*  for (let i = 1; i <= thisDate; i++) {
-        const dayOfWeek = new Date(currentYear, currentMonth, i).getDay();
-        const dayClass = dayOfWeek === 0 ? 'sunday' : dayOfWeek === 6 ? 'saturday' : '';
-        calendar.innerHTML += `<div class="day current ${dayClass}">${i}</div>`;
-    }*/
-    
     for (let i = 1; i <= thisDate; i++) {
         const currentDate = new Date(currentYear, currentMonth, i); // 날짜 객체 생성
         const dayOfWeek = currentDate.getDay(); // 요일 (0:일 ~ 6:토)
