@@ -12,7 +12,12 @@
 	<div class="container">
 
 		<div class="title-container">
-			<h1>CALENDAR</h1>
+			<span id="logo">CALENDAR</span>
+
+			<div id="login-container">
+    			<a>LOGIN</a>
+    			<a>LOGOUT</a>
+			</div>
 		</div>
 	
 		<div class="wrap-container">
